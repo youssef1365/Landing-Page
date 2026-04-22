@@ -4,7 +4,7 @@ export const siteConfig = {
     eventTagline: "Accra, June 2026",
     description: "8–10 pre-qualified B2B meetings with West African buyers, distributors and partners across agrifood, construction, technology, and financial services.",
     logo: "West Africa Market Entry Program",
-    favicon: "/favicon.ico",
+    favicon: "/winklogo.png",
   },
 
 
