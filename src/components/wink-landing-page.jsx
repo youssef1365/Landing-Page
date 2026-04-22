@@ -5,7 +5,7 @@ import ParticipantProfiles from './ParticipantProfiles';
 import ApplicationForms from './ApplicationForms';
 import { siteConfig } from '../config/siteConfig.js';
 import Journey from './Journey.jsx'
-import StatsAndCta from './StatsandCta.jsx';
+import StatsAndCta from './Statsandcta.jsx';
 
 export default function WinkLandingPage({userType}) {
   const [scrolled, setScrolled] = useState(false);
