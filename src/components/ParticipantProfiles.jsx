@@ -1,324 +1,311 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { siteConfig } from '../config/siteConfig';
 
-export default function ParticipantProfiles() {
-  const { participantProfiles } = siteConfig;
+export default function ParticipantProfiles({ userType }) {
+  const { colors } = siteConfig;
+  const data = siteConfig.participantProfiles[userType];
   const [visible, setVisible] = useState(false);
   const ref = useRef(null);
 
-  const { colors } = siteConfig;
-
   useEffect(() => {
     const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) setVisible(true);
-      },
+      ([entry]) => { if (entry.isIntersecting) setVisible(true); },
       { threshold: 0.1 }
     );
-
     if (ref.current) observer.observe(ref.current);
     return () => observer.disconnect();
   }, []);
 
+  const sectors = [...data.sectorsCovered, ...data.sectorsCovered];
+
   return (
-    <>
-      <section className="profiles" ref={ref} id="ParticipantProfiles">
-        <div className={`profiles-inner ${visible ? 'visible' : ''}`}>
+    <section
+      ref={ref}
+      id="ParticipantProfiles"
+      style={{
+        background: colors.surfaceWhite,
+        padding: '100px 80px',
+        borderTop: `1px solid ${colors.borderLight}`,
+        width: '100%',
+        boxSizing: 'border-box',
+      }}
+    >
+      <div
+        className="profiles-inner"
+        style={{
+          maxWidth: '1400px',
+          margin: '0 auto',
+          opacity: visible ? 1 : 0,
+          transform: visible ? 'translateY(0)' : 'translateY(24px)',
+          transition: 'opacity 0.8s ease, transform 0.8s ease',
+        }}
+      >
 
-          <div className="profiles-label">
-            <span className="label-line" />
-            <span className="label-text">{participantProfiles.headline}</span>
-          </div>
-
-          <div className="profiles-header">
-            <h2>{participantProfiles.headline}</h2>
-            <p>{participantProfiles.subheadline}</p>
-          </div>
-
-
-          <div className="profiles-grid">
-
-            <div className="sectors-col">
-              <p className="col-title">Who You Will Meet</p>
-              <div className="sectors-list">
-                {participantProfiles.whoYouWillMeet.map((item, i) => (
-                  <div key={i} className="sector-row" style={{ transitionDelay: `${i * 0.07}s` }}>
-                    <span className="sector-icon">•</span>
-                    <span className="sector-name">{item}</span>
-                  </div>
-                ))}
-              </div>
-
-
-            </div>
-
-            <div className="criteria-col">
-              <div className="sectors-bar">
-                <p className="col-title">Sectors Covered</p>
-                <div className="sector-tags">
-                  {participantProfiles.sectorsCovered.map((item, i) => (
-                    <span key={i} className="sector-pill">
-                      {item}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-          </div>
-
+        {/* Eyebrow Label */}
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '10px',
+            marginBottom: '32px',
+            justifyContent: 'center',
+          }}
+        >
+          <span
+            style={{
+              width: '8px',
+              height: '8px',
+              borderRadius: '50%',
+              background: colors.primaryDark,
+              flexShrink: 0,
+            }}
+          />
+          <span
+            style={{
+              fontSize: '0.75rem',
+              fontWeight: 700,
+              letterSpacing: '0.13em',
+              textTransform: 'uppercase',
+              color: colors.textMuted,
+            }}
+          >
+            Who attends
+          </span>
         </div>
-      </section>
 
-      <style jsx>{`
-        .profiles {
-          background: #ffffff;
-          padding: 120px 80px;
-          position: relative;
-        }
+        {/* Header - Centered */}
+        <div
+          style={{
+            marginBottom: '72px',
+            textAlign: 'center',
+            maxWidth: '900px',
+            margin: '0 auto 72px',
+          }}
+        >
+          <h2
+            style={{
+              fontSize: '3rem',
+              fontWeight: 400,
+              color: colors.textDark,
+              lineHeight: 1.2,
+              letterSpacing: '-0.02em',
+              marginBottom: '16px',
+            }}
+          >
+            {data.headline}
+          </h2>
+          <p
+            style={{
+              fontSize: '1.1rem',
+              color: colors.textSecondary,
+              lineHeight: 1.7,
+              margin: 0,
+            }}
+          >
+            {data.subheadline}
+          </p>
+        </div>
 
-        .profiles::before {
-          content: '';
-          position: absolute;
-          top: 0;
-          left: 0;
-          right: 0;
-          height: 4px;
-          background: linear-gradient(90deg, #1a6e4a, #c8a84b, #2a5298);
-        }
+        {/* Who You Will Meet Section */}
+        <div style={{ marginBottom: '80px' }}>
+          <p
+            style={{
+              fontSize: '0.75rem',
+              fontWeight: 700,
+              letterSpacing: '0.12em',
+              textTransform: 'uppercase',
+              color: colors.primary,
+              marginBottom: '28px',
+              textAlign: 'center',
+            }}
+          >
+            Who you will meet
+          </p>
 
-        .profiles-inner {
-          max-width: 1200px;
-          margin: 0 auto;
-          opacity: 0;
-          transform: translateY(30px);
-          transition: opacity 0.9s ease, transform 0.9s ease;
-        }
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
+              gap: '20px',
+              maxWidth: '1300px',
+              margin: '0 auto',
+            }}
+          >
+            {data.whoYouWillMeet.map((item, i) => (
+              <div
+                key={i}
+                style={{
+                  background: colors.surfaceWhite,
+                  border: `1px solid ${colors.borderDarker}`,
+                  borderRadius: '12px',
+                  padding: '24px',
+                  display: 'flex',
+                  alignItems: 'flex-start',
+                  gap: '16px',
+                  transition: 'all 0.3s ease',
+                  cursor: 'pointer',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.borderColor = colors.primary;
+                  e.currentTarget.style.boxShadow = `0 8px 24px rgba(77, 217, 172, 0.12)`;
+                  e.currentTarget.style.transform = 'translateY(-4px)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.borderColor = colors.borderDarker;
+                  e.currentTarget.style.boxShadow = 'none';
+                  e.currentTarget.style.transform = 'translateY(0)';
+                }}
+              >
+                <span
+                  style={{
+                    width: '10px',
+                    height: '10px',
+                    borderRadius: '50%',
+                    background: colors.primaryDark,
+                    marginTop: '6px',
+                    flexShrink: 0,
+                  }}
+                />
+                <span
+                  style={{
+                    fontSize: '0.95rem',
+                    fontWeight: 500,
+                    color: colors.textDark,
+                    lineHeight: 1.5,
+                  }}
+                >
+                  {item}
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
 
-        .profiles-inner.visible {
-          opacity: 1;
-          transform: translateY(0);
-        }
+        {/* Sectors Covered Section */}
+        <div>
+          <p
+            style={{
+              fontSize: '0.75rem',
+              fontWeight: 700,
+              letterSpacing: '0.12em',
+              textTransform: 'uppercase',
+              color: colors.primary,
+              marginBottom: '28px',
+              textAlign: 'center',
+            }}
+          >
+            Sectors covered
+          </p>
 
-        .profiles-label {
-          display: flex;
-          align-items: center;
-          gap: 12px;
-          margin-bottom: 40px;
-          color: ${colors.primary};
-        }
+          <div
+            style={{
+              overflow: 'hidden',
+              borderTop: `1px solid ${colors.borderLight}`,
+              borderBottom: `1px solid ${colors.borderLight}`,
+              position: 'relative',
+              maxWidth: '100%',
+            }}
+          >
+            {/* Left Fade */}
+            <div
+              style={{
+                position: 'absolute',
+                left: 0,
+                top: 0,
+                bottom: 0,
+                width: '60px',
+                background: `linear-gradient(to right, ${colors.surfaceWhite}, transparent)`,
+                zIndex: 2,
+                pointerEvents: 'none',
+              }}
+            />
 
-        .label-line {
-          display: inline-block;
-          width: 32px;
-          height: 2px;
-          background: #1a6e4a;
-          flex-shrink: 0;
-        }
+            {/* Right Fade */}
+            <div
+              style={{
+                position: 'absolute',
+                right: 0,
+                top: 0,
+                bottom: 0,
+                width: '60px',
+                background: `linear-gradient(to left, ${colors.surfaceWhite}, transparent)`,
+                zIndex: 2,
+                pointerEvents: 'none',
+              }}
+            />
 
-        .label-text {
-          font-size: 0.75rem;
-          font-weight: 600;
-          letter-spacing: 0.15em;
-          color: #94a3b8;
-          text-transform: uppercase;
-        }
+            {/* Ticker Track */}
+            <div
+              style={{
+                display: 'flex',
+                width: 'max-content',
+                animation: 'ticker 45s linear infinite',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.animationPlayState = 'paused';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.animationPlayState = 'running';
+              }}
+            >
+              {sectors.map((s, i) => (
+                <div
+                  key={i}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '14px',
+                    padding: '18px 28px',
+                    whiteSpace: 'nowrap',
+                    borderRight: `1px solid ${colors.borderLight}`,
+                    fontSize: '0.95rem',
+                    fontWeight: 500,
+                    color: colors.primaryDark,
+                  }}
+                >
+                  <span
+                    style={{
+                      width: '6px',
+                      height: '6px',
+                      borderRadius: '50%',
+                      background: colors.primaryDark,
+                      opacity: 0.6,
+                      flexShrink: 0,
+                    }}
+                  />
+                  {s}
+                </div>
+              ))}
+            </div>
 
-        .profiles-header {
-          margin-bottom: 60px;
-          max-width: 640px;
+            <style>{`
+              @keyframes ticker {
+                0%   { transform: translateX(0); }
+                100% { transform: translateX(-50%); }
+              }
+            `}</style>
+          </div>
+        </div>
 
-        }
+      </div>
 
-        .profiles-header h2 {
-          font-size: 2.8rem;
-          font-weight: 300;
-          color: ${colors.background};
-          margin: 0 0 16px 0;
-          line-height: 1.2;
-          letter-spacing: -0.02em;
-        }
-
-        .profiles-header p {
-          font-size: 1rem;
-          color: #64748b;
-          line-height: 1.7;
-          margin: 0;
-        }
-
-        .stats-row {
-          display: flex;
-          gap: 0;
-          margin-bottom: 70px;
-          border: 1px solid #e2e8f0;
-          border-radius: 12px;
-          overflow: hidden;
-        }
-
-        .stat-block {
-          flex: 1;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          padding: 32px 20px;
-          border-right: 1px solid #e2e8f0;
-          background: #fafafa;
-          gap: 6px;
-        }
-
-        .stat-block:last-child {
-          border-right: none;
-        }
-
-        .stat-num {
-          font-size: 2rem;
-          font-weight: 700;
-          color: #0b1220;
-          letter-spacing: -0.03em;
-        }
-
-        .stat-label {
-          font-size: 0.75rem;
-          color: #94a3b8;
-          text-transform: uppercase;
-          letter-spacing: 0.1em;
-          font-weight: 500;
-        }
-
-        .profiles-grid {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 60px;
-          align-items: start;
-        }
-
-        .col-title {
-          font-size: 0.7rem;
-          font-weight: 700;
-          letter-spacing: 0.14em;
-          text-transform: uppercase;
-          color: #94a3b8;
-          margin: 0 0 24px 0;
-        }
-
-        .sectors-list {
-          display: flex;
-          flex-direction: column;
-          gap: 16px;
-        }
-
-        .sector-row {
-          display: grid;
-          grid-template-columns: 28px 1fr;
-          align-items: center;
-          gap: 12px;
-          padding: 14px 0;
-          border-bottom: 1px solid #f1f5f9;
-          transition: transform 0.3s ease;
-        }
-
-        .sector-row:hover {
-          transform: translateX(4px);
-        }
-
-        .sector-icon {
-          font-size: 1.1rem;
-        }
-
-        .sector-name {
-          font-size: 0.9rem;
-          font-weight: 600;
-          color: #0b1220;
-        }
-
-        .sectors-bar {
-          margin-top: 40px;
-          padding: 22px 24px;
-          border: 1px solid #dbe4e8;
-          border-radius: 6px;
-          background: #f8fafb;
-        }
-
-        .sector-tags {
-          display: flex;
-          flex-wrap: wrap;
-          gap: 12px;
-          margin-top: 14px;
-        }
-
-        .sector-pill {
-          padding: 8px 16px;
-          border: 1px solid #bfd3db;
-          border-radius: 3px;
-          font-size: 0.85rem;
-          color: #1a6e4a;
-          background: #ffffff;
-          white-space: nowrap;
-        }
-
-        .criteria-cards {
-          display: flex;
-          flex-direction: column;
-          gap: 16px;
-        }
-
-        .criteria-card {
-          display: flex;
-          align-items: flex-start;
-          gap: 16px;
-          padding: 20px 24px;
-          border-radius: 10px;
-          border: 1px solid #e2e8f0;
-          background: #fafafa;
-          transition: all 0.3s ease;
-        }
-
-        .criteria-card:hover {
-          border-color: #1a6e4a30;
-          background: #f0faf5;
-          transform: translateX(4px);
-        }
-
-        .criteria-icon {
-          font-size: 1.3rem;
-          flex-shrink: 0;
-        }
-
-        .criteria-text {
-          font-size: 0.9rem;
-          color: #334155;
-          line-height: 1.5;
-          font-weight: 500;
+      {/* Responsive Media Queries */}
+      <style>{`
+        @media (max-width: 1200px) {
+          section { padding: 80px 60px; }
         }
 
         @media (max-width: 768px) {
-          .profiles {
-            padding: 80px 24px;
-          }
+          section { padding: 60px 24px; }
+          h2 { font-size: 2.2rem !important; }
+        }
 
-          .profiles-header h2 {
-            font-size: 2rem;
-          }
-
-          .stats-row {
-            flex-direction: column;
-          }
-
-          .stat-block {
-            border-right: none;
-            border-bottom: 1px solid #e2e8f0;
-          }
-
-          .profiles-grid {
-            grid-template-columns: 1fr;
-            gap: 40px;
-          }
-
-          .sector-row {
-            grid-template-columns: 28px 1fr;
-          }
+        @media (max-width: 480px) {
+          section { padding: 48px 16px; }
+          h2 { font-size: 1.8rem !important; }
+          .grid-item { grid-template-columns: 1fr !important; }
         }
       `}</style>
-    </>
+    </section>
   );
 }

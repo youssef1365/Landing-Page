@@ -1,9 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { siteConfig } from '../config/siteConfig';
 
-export default function EventOverview({ userType = 'seller' }) {
+export default function EventOverview({ userType }) {
   const { eventOverview, colors } = siteConfig;
   const data = eventOverview[userType];
+  console.log('EventOverview userType:', userType);
   const [visible, setVisible] = useState(false);
   const ref = useRef(null);
 

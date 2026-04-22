@@ -1,18 +1,18 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { siteConfig } from '../config/siteConfig';
 
-export default function ApplicationForms() {
+export default function ApplicationForms({ userType }) {
   const { forms } = siteConfig;
-  const [activeForm, setActiveForm] = useState('seller');
   const [submitted, setSubmitted] = useState(false);
   const [visible, setVisible] = useState(false);
   const ref = useRef(null);
 
+  const currentForm = userType === 'seller' ? forms.sellerForm : forms.buyerForm;
+
   const initState = (fields) =>
     fields.reduce((acc, f) => ({ ...acc, [f.name]: '' }), {});
 
-  const [sellerData, setSellerData] = useState(() => initState(forms.sellerForm.fields));
-  const [buyerData, setBuyerData] = useState(() => initState(forms.buyerForm.fields));
+  const [formData, setFormData] = useState(() => initState(currentForm.fields));
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -23,9 +23,9 @@ export default function ApplicationForms() {
     return () => observer.disconnect();
   }, []);
 
-  const handleChange = (setter) => (e) => {
+  const handleChange = (e) => {
     const { name, value } = e.target;
-    setter(prev => ({ ...prev, [name]: value }));
+    setFormData(prev => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = (e) => {
@@ -34,8 +34,8 @@ export default function ApplicationForms() {
     setTimeout(() => setSubmitted(false), 4000);
   };
 
-  const renderField = (field, value, onChange) => {
-    const base = { name: field.name, value, onChange, placeholder: field.placeholder };
+  const renderField = (field, value) => {
+    const base = { name: field.name, value, onChange: handleChange, placeholder: field.placeholder };
     if (field.type === 'select') {
       const options =
         field.name === 'industry' ? forms.selectOptions.industries :
@@ -54,14 +54,9 @@ export default function ApplicationForms() {
     return <input {...base} type={field.type} required={field.required} />;
   };
 
-  const currentForm = activeForm === 'seller' ? forms.sellerForm : forms.buyerForm;
-  const currentData = activeForm === 'seller' ? sellerData : buyerData;
-  const currentSetter = activeForm === 'seller' ? setSellerData : setBuyerData;
-
   const pairs = [];
-  const fields = currentForm.fields;
-  for (let i = 0; i < fields.length; i += 2) {
-    pairs.push(fields.slice(i, i + 2));
+  for (let i = 0; i < currentForm.fields.length; i += 2) {
+    pairs.push(currentForm.fields.slice(i, i + 2));
   }
 
   return (
@@ -79,26 +74,7 @@ export default function ApplicationForms() {
               A selective programme connecting companies with pre-qualified West African buyers, distributors and partners.
             </p>
 
-            <div className="toggle-group">
-              <button
-                className={`toggle-btn ${activeForm === 'seller' ? 'active' : ''}`}
-                onClick={() => { setActiveForm('seller'); setSubmitted(false); }}
-              >
-                <span className="toggle-icon">🏢</span>
-                <span className="toggle-label">I'm a Company</span>
-                <span className="toggle-sub">Looking for buyers</span>
-              </button>
-              <button
-                className={`toggle-btn ${activeForm === 'buyer' ? 'active' : ''}`}
-                onClick={() => { setActiveForm('buyer'); setSubmitted(false); }}
-              >
-                <span className="toggle-icon">👤</span>
-                <span className="toggle-label">I'm a Buyer</span>
-                <span className="toggle-sub">Looking to source</span>
-              </button>
-            </div>
-
-            {activeForm === 'seller' && (
+            {userType === 'seller' && (
               <div className="steps">
                 {forms.sellerForm.processSteps.map((step, i) => (
                   <div key={i} className="step-row">
@@ -109,13 +85,13 @@ export default function ApplicationForms() {
               </div>
             )}
 
-            {activeForm === 'buyer' && (
+            {userType === 'buyer' && (
               <div className="exclusivity">
                 {forms.buyerForm.exclusivityNotice}
               </div>
             )}
 
-            {activeForm === 'seller' && (
+            {userType === 'seller' && (
               <div className="notice-box">
                 {forms.sellerForm.notice}
               </div>
@@ -144,7 +120,7 @@ export default function ApplicationForms() {
                             {field.label}
                             {field.required && <span className="required">*</span>}
                           </label>
-                          {renderField(field, currentData[field.name], handleChange(currentSetter))}
+                          {renderField(field, formData[field.name])}
                         </div>
                       ))}
                     </div>
@@ -231,59 +207,6 @@ export default function ApplicationForms() {
           color: #64748b;
           line-height: 1.7;
           margin: 0 0 40px 0;
-        }
-
-        .toggle-group {
-          display: flex;
-          flex-direction: column;
-          gap: 12px;
-          margin-bottom: 36px;
-        }
-
-        .toggle-btn {
-          display: grid;
-          grid-template-columns: 36px 1fr;
-          grid-template-rows: auto auto;
-          column-gap: 14px;
-          align-items: center;
-          padding: 18px 20px;
-          border-radius: 10px;
-          border: 1px solid #e2e8f0;
-          background: white;
-          cursor: pointer;
-          text-align: left;
-          transition: all 0.3s ease;
-        }
-
-        .toggle-btn:hover {
-          border-color: #1a6e4a40;
-          background: #f0faf5;
-        }
-
-        .toggle-btn.active {
-          border-color: #1a6e4a;
-          background: #f0faf5;
-          box-shadow: 0 0 0 3px rgba(26, 110, 74, 0.08);
-        }
-
-        .toggle-icon {
-          font-size: 1.4rem;
-          grid-row: span 2;
-          display: flex;
-          align-items: center;
-        }
-
-        .toggle-label {
-          font-size: 0.9rem;
-          font-weight: 700;
-          color: #0b1220;
-          line-height: 1;
-        }
-
-        .toggle-sub {
-          font-size: 0.78rem;
-          color: #94a3b8;
-          margin-top: 2px;
         }
 
         .steps {
@@ -482,28 +405,11 @@ export default function ApplicationForms() {
         }
 
         @media (max-width: 768px) {
-          .appforms {
-            padding: 80px 24px;
-          }
-
-          .appforms-inner {
-            grid-template-columns: 1fr;
-            gap: 40px;
-          }
-
-          .appforms-left h2 {
-            font-size: 1.8rem;
-          }
-
-          .form-row {
-            grid-template-columns: 1fr;
-          }
-
-          .form-card-header,
-          .form {
-            padding-left: 24px;
-            padding-right: 24px;
-          }
+          .appforms { padding: 80px 24px; }
+          .appforms-inner { grid-template-columns: 1fr; gap: 40px; }
+          .appforms-left h2 { font-size: 1.8rem; }
+          .form-row { grid-template-columns: 1fr; }
+          .form-card-header, .form { padding-left: 24px; padding-right: 24px; }
         }
       `}</style>
     </>

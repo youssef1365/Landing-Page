@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { siteConfig } from '../config/siteConfig.js';
 
-export default function Hero({ userType = 'seller' }) {
+export default function Hero({ userType }) {
   const [activeModal, setActiveModal] = useState(null);
   const [mounted, setMounted] = useState(false);
 
@@ -193,7 +193,7 @@ export default function Hero({ userType = 'seller' }) {
         .stat-value { font-size: 1.5rem; color: #e2eaf3; font-weight: 600; }
 
         .stat-label {
-          font-size: 8rem;
+          font-size: 1rem;
           text-transform: uppercase;
           color: ${colors.primary};
         }

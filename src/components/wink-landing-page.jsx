@@ -4,8 +4,10 @@ import EventOverview from './EventOverview';
 import ParticipantProfiles from './ParticipantProfiles';
 import ApplicationForms from './ApplicationForms';
 import { siteConfig } from '../config/siteConfig.js';
+import Journey from './Journey.jsx'
+import StatsAndCta from './StatsAndCta.jsx';
 
-export default function WinkLandingPage() {
+export default function WinkLandingPage({userType}) {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -55,10 +57,13 @@ export default function WinkLandingPage() {
         )}
       </header>
 
-      <Hero />
-      <div id="EventOverview"><EventOverview /></div>
-      <div id="ParticipantProfiles"><ParticipantProfiles /></div>
-      <div id="ApplicationForms"><ApplicationForms /></div>
+      <Hero userType={userType}/>
+      <div id="EventOverview"><EventOverview userType={userType}/></div>
+      <div id="ParticipantProfiles"><ParticipantProfiles userType={userType}/></div>
+      <div id="Journey"><Journey userType={userType}/></div>
+      <div id="StatsAndCta"><StatsAndCta userType={userType}  /></div>
+      <div id="ApplicationForms"><ApplicationForms userType={userType}/></div>
+
 
       <footer className="footer">
         <div className="footer-glow" />
