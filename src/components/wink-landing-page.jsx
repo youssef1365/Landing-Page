@@ -75,7 +75,6 @@ export default function WinkLandingPage({userType}) {
       <div id="StatsAndCta"><StatsAndCta userType={userType}  /></div>
       <div id="ApplicationForms"><ApplicationForms userType={userType}/></div>
 
-      {/* Floating scroll-to-top button */}
       <button
         className={`scroll-top-btn ${showScrollTop ? 'visible' : ''}`}
         onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
