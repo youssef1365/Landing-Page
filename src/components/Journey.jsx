@@ -17,7 +17,6 @@ function useVisible(threshold = 0.1) {
 
 export default function Journey({ userType, onApply }) {
   const d = userType === 'seller' ? siteConfig.sellerJourney : siteConfig.buyerJourney;
-
   const [ref, visible] = useVisible();
 
   const steps = d.process.steps.map(s => ({
@@ -26,16 +25,17 @@ export default function Journey({ userType, onApply }) {
     description: s.description,
   }));
 
+  const sectionId = userType === 'seller' ? 'SellerJourney' : 'BuyerJourney';
+
   return (
     <>
-      <section className="journey" ref={ref} id={`${userType === 'seller' ? 'Seller' : 'Buyer'}Journey`}>
+      <section className="journey" ref={ref} id={sectionId}>
         <div className={`wrap ${visible ? 'visible' : ''}`}>
 
           <div className="top-intro">
             <span className="dot" />
             <div className="accent-bar" />
             <h2>{d.cta.headline}</h2>
-
             <p className="desc">{d.cta.copy}</p>
           </div>
 
@@ -65,6 +65,7 @@ export default function Journey({ userType, onApply }) {
               <img src={d.process.image} alt={d.process.imageAlt} />
             </div>
           </div>
+
         </div>
       </section>
 
@@ -97,15 +98,39 @@ export default function Journey({ userType, onApply }) {
           box-sizing: border-box;
         }
 
-        .eyebrow { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; }
-        .dot { width: 8px; height: 8px; border-radius: 50%; background: #4dd9ac; flex-shrink: 0; }
-        .eyebrow-label { font-size: 11px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: #4dd9ac; }
+        .dot {
+          display: block;
+          width: 8px;
+          height: 8px;
+          border-radius: 50%;
+          background: #4dd9ac;
+          flex-shrink: 0;
+          margin-bottom: 16px;
+        }
 
-        h2 { font-size: 2.8rem; font-weight: 300; color: #ffffff; line-height: 1.15; letter-spacing: -0.02em; margin: 0 0 16px 0; }
+        .accent-bar {
+          width: 48px;
+          height: 3px;
+          background: #4dd9ac;
+          border-radius: 2px;
+          margin: 0 0 24px 0;
+        }
 
-        .accent-bar { width: 48px; height: 3px; background: #4dd9ac; border-radius: 2px; margin: 0 0 24px 0; }
+        h2 {
+          font-size: 2.8rem;
+          font-weight: 300;
+          color: #fff;
+          line-height: 1.15;
+          letter-spacing: -0.02em;
+          margin: 0 0 16px 0;
+        }
 
-        .desc { font-size: 1.05rem; color: #94aec4; line-height: 1.75; margin: 0; }
+        .desc {
+          font-size: 1.05rem;
+          color: #94aec4;
+          line-height: 1.75;
+          margin: 0;
+        }
 
         .two-col {
           display: grid;
@@ -113,30 +138,81 @@ export default function Journey({ userType, onApply }) {
           gap: 48px;
         }
 
-        .two-col-content { margin-top: 20px; align-items: start; }
+        .two-col-content {
+          margin-top: 20px;
+          align-items: start;
+        }
 
-        .section-label { font-size: 11px; font-weight: 600; letter-spacing: 0.18em; color: #4dd9ac; margin: 0 0 12px 0; text-transform: uppercase; }
+        .section-label {
+          font-size: 11px;
+          font-weight: 600;
+          letter-spacing: 0.18em;
+          color: #4dd9ac;
+          margin: 0 0 12px 0;
+          text-transform: uppercase;
+        }
 
-        h3 { font-size: 1.8rem; font-weight: 300; color: #ffffff; line-height: 1.2; letter-spacing: -0.02em; margin: 0; }
+        h3 {
+          font-size: 1.8rem;
+          font-weight: 300;
+          color: #fff;
+          line-height: 1.2;
+          letter-spacing: -0.02em;
+          margin: 0;
+        }
 
-        .steps-card { border: 1px solid rgba(77, 217, 172, 0.15); border-radius: 8px; overflow: hidden; margin-bottom: 32px; }
-        .step-row { display: flex; align-items: center; gap: 20px; padding: 18px 24px; background: rgba(255,255,255,0.02); transition: background 0.2s; }
+        .steps-card {
+          border: 1px solid rgba(77, 217, 172, 0.15);
+          border-radius: 8px;
+          overflow: hidden;
+          margin-bottom: 32px;
+        }
+
+        .step-row {
+          display: flex;
+          align-items: center;
+          gap: 20px;
+          padding: 18px 24px;
+          background: rgba(255, 255, 255, 0.02);
+          transition: background 0.2s;
+        }
+
         .step-row:hover { background: rgba(77, 217, 172, 0.05); }
+
         .step-row.bordered { border-bottom: 1px solid rgba(77, 217, 172, 0.1); }
-        .step-num { width: 32px; height: 32px; border-radius: 50%; background: #1a2d45; color: #ffffff; font-size: 0.78rem; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-        .step-body { display: flex; flex-direction: column; gap: 3px; }
-        .step-title { font-size: 0.92rem; font-weight: 600; color: #ffffff; }
-        .step-desc { font-size: 0.82rem; font-weight: 400; color: #94aec4; line-height: 1.5; }
 
-        .btn { padding: 15px 36px; background: #4dd9ac; color: #0d1b2e; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.1em; border: none; border-radius: 6px; cursor: pointer; text-transform: uppercase; transition: background 0.2s, transform 0.15s; }
-        .btn:hover { background: #3bc99c; transform: translateY(-2px); }
+        .step-num {
+          width: 32px;
+          height: 32px;
+          border-radius: 50%;
+          background: #1a2d45;
+          color: #fff;
+          font-size: 0.78rem;
+          font-weight: 700;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-shrink: 0;
+        }
 
-        .why-list { display: flex; flex-direction: column; }
-        .why-item { display: flex; align-items: flex-start; gap: 14px; padding: 16px 0; border-bottom: 1px solid rgba(77, 217, 172, 0.08); }
-        .why-item:first-child { border-top: 1px solid rgba(77, 217, 172, 0.08); }
-        .check { width: 20px; height: 20px; border-radius: 50%; background: rgba(77, 217, 172, 0.12); position: relative; flex-shrink: 0; margin-top: 2px; }
-        .check::after { content: ''; position: absolute; top: 6px; left: 5px; width: 10px; height: 5px; border-left: 2px solid #4dd9ac; border-bottom: 2px solid #4dd9ac; transform: rotate(-45deg); }
-        .why-text { font-size: 0.95rem; color: #d0dde8; line-height: 1.55; }
+        .step-body {
+          display: flex;
+          flex-direction: column;
+          gap: 3px;
+        }
+
+        .step-title {
+          font-size: 0.92rem;
+          font-weight: 600;
+          color: #fff;
+        }
+
+        .step-desc {
+          font-size: 0.82rem;
+          font-weight: 400;
+          color: #94aec4;
+          line-height: 1.5;
+        }
 
         .process-image {
           position: sticky;
@@ -158,6 +234,7 @@ export default function Journey({ userType, onApply }) {
           display: block;
           border-radius: 12px;
           border: 1px solid rgba(77, 217, 172, 0.15);
+          object-position: center bottom;
         }
 
         @media (max-width: 900px) {
@@ -165,8 +242,16 @@ export default function Journey({ userType, onApply }) {
           .top-intro { width: 100%; padding-right: 0; }
           .two-col { grid-template-columns: 1fr; gap: 32px; }
           h2 { font-size: 2.2rem; }
-          .process-image { position: static; }
+          .process-image { position: static; transform: none; }
           .process-image img { height: 240px; }
+        }
+
+        @media (max-width: 480px) {
+          .journey { padding: 48px 16px; }
+          h2 { font-size: 1.8rem; }
+          h3 { font-size: 1.4rem; }
+          .desc { font-size: 0.95rem; }
+          .step-row { padding: 14px 16px; gap: 14px; }
         }
       `}</style>
     </>

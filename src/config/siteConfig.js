@@ -217,7 +217,7 @@ export const siteConfig = {
     process: {
       label: "The Process",
       headline: "How it works",
-      image: "/howseller.jpg",
+      image: "/howseller.png",
       imageAlt: "Buyer meeting schedule and process at WINK B2B program",
       steps: [
         { number: "1", title: "Apply", description: "Submit your request and specify the products you are looking for." },

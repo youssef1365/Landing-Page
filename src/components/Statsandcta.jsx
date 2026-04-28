@@ -208,7 +208,6 @@ export default function StatsAndCta({ userType, onApply }) {
           color: ${colors.textMuted};
         }
 
-        /* ── Tablet ── */
         @media (max-width: 1024px) {
           .sac-section {
             padding: 80px 32px;
@@ -229,7 +228,6 @@ export default function StatsAndCta({ userType, onApply }) {
           }
         }
 
-        /* ── Mobile ── */
         @media (max-width: 768px) {
           .sac-section {
             padding: 60px 24px;
