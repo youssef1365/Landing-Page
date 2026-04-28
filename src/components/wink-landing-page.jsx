@@ -79,7 +79,7 @@ export default function WinkLandingPage({userType}) {
               <div className="logo">
                 <img src={siteConfig.header.logoImage} alt="WINK Logo" className="logo-img" />
               </div>
-              <p className="footer-brand-desc">{siteConfig.footer.sections[0].description}</p>
+              <p className="footer-brand-desc" style={{marginTop: '24px'}}>{siteConfig.footer.sections[0].description}</p>
               <div className="footer-badge">
                 <span>Accra</span>
                 <span className="badge-sep">·</span>
@@ -123,7 +123,12 @@ export default function WinkLandingPage({userType}) {
                 {siteConfig.footer.sections[3].contactInfo.map((info, i) => (
                   <div key={i} className="contact-item">
                     <span className="contact-label">{info.label}</span>
-                    <span className="contact-value">{info.value}</span>
+                    <a
+                      href={info.label === 'Email' ? `mailto:${info.value}` : `tel:${info.value.replace(/\s/g, '')}`}
+                      className="contact-value contact-link"
+                    >
+                      {info.value}
+                    </a>
                   </div>
                 ))}
               </div>
@@ -467,8 +472,23 @@ export default function WinkLandingPage({userType}) {
 
         .contact-item {
           display: flex;
-          flex-direction: column;
-          gap: 4px;
+          flex-direction: row;
+          align-items: center;
+          gap: 10px;
+          white-space: nowrap;
+        }
+
+        .contact-value {
+          white-space: nowrap;
+        }
+
+        .contact-link {
+          text-decoration: none;
+          transition: color 0.2s ease;
+        }
+
+        .contact-link:hover {
+          color: #4dd9ac;
         }
 
         .contact-label {

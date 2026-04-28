@@ -180,7 +180,7 @@ export const siteConfig = {
     process: {
       label: "The Process",
       headline: "How it works",
-      image: "/how-it-works-seller.jpg",
+      image: "/howseller.jpg",
       imageAlt: "Seller meeting process at WINK B2B program",
       steps: [
         { number: "1", title: "Submit Your Application", description: "A short form — takes 5 minutes. We review every application personally." },
@@ -191,7 +191,7 @@ export const siteConfig = {
     whyJoin: {
       label: "Why Join",
       headline: "Why Sellers Choose WINK",
-      image: "/howsller.jpeg",
+      image: "/how-it-works-seller.png",
       imageAlt: "International sellers meeting West African buyers at WINK event",
       reasons: [
         {title: "No wasted meetings.", desc : "Every buyer is screened and matched to your product profile before the program."},
@@ -217,7 +217,7 @@ export const siteConfig = {
     process: {
       label: "The Process",
       headline: "How it works",
-      image: "/how-it-works-buyer.png",
+      image: "/howseller.jpg",
       imageAlt: "Buyer meeting schedule and process at WINK B2B program",
       steps: [
         { number: "1", title: "Apply", description: "Submit your request and specify the products you are looking for." },
@@ -230,7 +230,7 @@ export const siteConfig = {
     whyJoin: {
       label: "Why Join",
       headline: "Why join as a buyer",
-      image: "/why-join-buyer.png",
+      image: "/how-it-works-seller.png",
       imageAlt: "Ghanaian buyers discovering international suppliers at WINK event",
       reasons: [
         { title: "Meet international suppliers in one place"},

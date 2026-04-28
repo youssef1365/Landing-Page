@@ -96,7 +96,31 @@ export default function Journey({ userType }) {
           display: grid;
           grid-template-columns: 1fr 1fr;
           gap: 48px;
-          align-items: start;
+          align-items: stretch;
+          height: 100%;
+        }
+
+        .why-image {
+          opacity: 0;
+          transform: translateX(-30px);
+          transition: opacity 0.7s ease 0.2s, transform 0.7s ease 0.2s;
+          border-radius: 12px;
+          overflow: hidden;
+          max-height: 600px;
+        }
+
+        .why-image img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          display: block;
+          border-radius: 12px;
+          border: 1px solid rgba(77, 217, 172, 0.15);
+        }
+
+        .why-image.visible {
+          opacity: 1;
+          transform: translateX(0);
         }
 
         .reasons-container {
@@ -151,7 +175,6 @@ export default function Journey({ userType }) {
         }
 
         .image-col {
-          position: sticky;
           top: 80px;
           opacity: 0;
           transform: translateX(30px);
