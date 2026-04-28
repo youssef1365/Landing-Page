@@ -74,7 +74,7 @@ export const siteConfig = {
       headlinePlain: "Join the Agrofood Trade Mission in Accra",
       headlineAccent: " Curated B2B Program ",
       subheadline: "Meet qualified food exporters from Egypt, France, Spain, Canada, the USA, Morocco, and Italy through structured, high-impact B2B meetings.",
-      ctaPrimary: { text: "Join as Buyer", target: "buyer" },
+      ctaPrimary: { text: "Apply", target: "ApplicationForms" },
       ctaSecondary: { text: "How it works", target: "Journey" },
       useBackgroundImage: true,
       backgroundImage: "/hero-buyer.png",
@@ -106,7 +106,7 @@ export const siteConfig = {
       label: "The Program",
       headline: "This is not a traditional exhibition.",
       subheadline: "It is a curated B2B program designed to connect Ghanaian importers, distributors, and retailers with international food exporters looking to enter or expand in the Ghanaian market. Every meeting is pre-scheduled and tailored to your sourcing needs. No random networking, only relevant business discussions.",
-      featuretitle: "What to Expect",
+      featuretitle: "What you Get",
       features: [
         "Pre-scheduled one-on-one meetings with international exporters",
         "Suppliers from Egypt, France, Spain, Canada, USA, Morocco, and Italy",

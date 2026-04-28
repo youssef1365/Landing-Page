@@ -11,12 +11,15 @@ import WhyJoin from './WhyJoin.jsx'
 export default function WinkLandingPage({userType}) {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-
+  const [showScrollTop, setShowScrollTop] = useState(false);
 
    const { colors } = siteConfig;
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40);
+    const onScroll = () => {
+      setScrolled(window.scrollY > 40);
+      setShowScrollTop(window.scrollY > 400);
+    };
     window.addEventListener('scroll', onScroll);
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
@@ -26,7 +29,7 @@ export default function WinkLandingPage({userType}) {
 
       <header className={`header ${scrolled ? 'scrolled' : ''}`}>
         <div className="header-inner">
-         <div className="logo">
+         <div className="logo" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
            <img src={siteConfig.header.logoImage} alt="WINK Logo" className="logo-img" />
          </div>
 
@@ -63,11 +66,23 @@ export default function WinkLandingPage({userType}) {
       <Hero userType={userType}/>
       <div id="EventOverview"><EventOverview userType={userType}/></div>
       <div id="ParticipantProfiles"><ParticipantProfiles userType={userType}/></div>
-      <div id="Journey"><Journey userType={userType}/></div>
-      <div id="WhyJoin"><WhyJoin userType={userType}/></div>
+      <div id="Journey" style={{ marginBottom: '-40px' }}>
+        <Journey userType={userType}/>
+      </div>
+      <div id="WhyJoin">
+        <WhyJoin userType={userType}/>
+      </div>
       <div id="StatsAndCta"><StatsAndCta userType={userType}  /></div>
       <div id="ApplicationForms"><ApplicationForms userType={userType}/></div>
 
+      {/* Floating scroll-to-top button */}
+      <button
+        className={`scroll-top-btn ${showScrollTop ? 'visible' : ''}`}
+        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+        aria-label="Back to top"
+      >
+        ↑
+      </button>
 
       <footer className="footer">
         <div className="footer-glow" />
@@ -146,6 +161,47 @@ export default function WinkLandingPage({userType}) {
       </footer>
 
       <style jsx>{`
+
+        /* ===== SCROLL TO TOP BUTTON ===== */
+        .scroll-top-btn {
+          position: fixed;
+          bottom: 32px;
+          right: 32px;
+          z-index: 999;
+          width: 44px;
+          height: 44px;
+          border-radius: 50%;
+          background: ${colors.primary};
+          color: white;
+          border: none;
+          cursor: pointer;
+          font-size: 1.1rem;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+          opacity: 0;
+          transform: translateY(12px);
+          pointer-events: none;
+          transition: opacity 0.3s ease, transform 0.3s ease, background 0.2s ease;
+        }
+
+        .scroll-top-btn.visible {
+          opacity: 1;
+          transform: translateY(0);
+          pointer-events: auto;
+        }
+
+        .scroll-top-btn:hover {
+          background: #15593c;
+          transform: translateY(-2px);
+          box-shadow: 0 6px 20px rgba(26,110,74,0.45);
+        }
+
+        .scroll-top-btn:active {
+          transform: translateY(0);
+        }
+
         .landing-page {
           width: 100%;
           overflow-x: hidden;
@@ -575,6 +631,13 @@ export default function WinkLandingPage({userType}) {
 
           .logo-text {
             font-size: 0.9rem;
+          }
+
+          .scroll-top-btn {
+            bottom: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
           }
         }
       `}</style>
