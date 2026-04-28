@@ -24,208 +24,325 @@ export default function StatsAndCta({ userType, onApply }) {
   const [ref, visible] = useVisible();
   const [isHovering, setIsHovering] = useState(false);
 
-  const sectionStyle = {
-    position: 'relative',
-    background: colors.surfaceLight,
-    padding: '120px 80px',
-    width: '100%',
-    boxSizing: 'border-box',
-    overflow: 'hidden',
-  };
-
-  const bgStyle = {
-    position: 'absolute',
-    inset: 0,
-    zIndex: 0,
-  };
-
-  const gridOverlayStyle = {
-    position: 'absolute',
-    inset: 0,
-    backgroundImage: `
-      linear-gradient(rgba(0, 0, 0, 0.02) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(0, 0, 0, 0.02) 1px, transparent 1px)
-    `,
-    backgroundSize: '60px 60px',
-    pointerEvents: 'none',
-  };
-
-  const innerStyle = {
-    position: 'relative',
-    zIndex: 1,
-    maxWidth: '1200px',
-    margin: '0 auto',
-    opacity: visible ? 1 : 0,
-    transform: visible ? 'translateY(0)' : 'translateY(40px)',
-    transition: 'opacity 0.9s ease, transform 0.9s ease',
-  };
-
-  const labelRowStyle = {
-    display: 'flex',
-    alignItems: 'center',
-    gap: '12px',
-    marginBottom: '48px',
-    justifyContent: 'center',
-  };
-
-  const labelLineStyle = {
-    width: '32px',
-    background: colors.primary,
-    boxShadow: `0 0 10px ${colors.primary}`,
-  };
-
-  const labelTextStyle = {
-    fontSize: '0.75rem',
-    fontWeight: 700,
-    letterSpacing: '0.15em',
-    textTransform: 'uppercase',
-    color: colors.primary,
-  };
-
-  const statsGridStyle = {
-    display: 'grid',
-    gridTemplateColumns: 'repeat(3, 1fr)',
-    border: `1px solid ${colors.borderLight}`,
-    borderRadius: '12px',
-    overflow: 'hidden',
-    marginBottom: '100px',
-    background: colors.surfaceWhite,
-    boxShadow: '0 4px 24px rgba(0, 0, 0, 0.04)',
-  };
-
-  const statCellStyle = {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: '60px 40px',
-    borderRight: `1px solid ${colors.borderLight}`,
-    textAlign: 'center',
-    transition: 'all 0.3s ease',
-  };
-
-  const statCellLastStyle = {
-    ...statCellStyle,
-    borderRight: 'none',
-  };
-
-  const statValueStyle = {
-    fontSize: '4rem',
-    fontWeight: 300,
-    lineHeight: 1,
-    marginBottom: '20px',
-    letterSpacing: '-0.02em',
-    color: colors.textDark,
-  };
-
-  const suffixStyle = {
-    fontSize: '0.65em',
-    fontWeight: 700,
-    letterSpacing: '0.05em',
-    color: colors.primary,
-  };
-
-  const statSublabelStyle = {
-    fontSize: '11px',
-    fontWeight: 900,
-    letterSpacing: '0.16em',
-    color: colors.textMuted,
-  };
-
-  const ctaBlockStyle = {
-    textAlign: 'center',
-    maxWidth: '640px',
-    margin: '0 auto',
-  };
-
-  const headingStyle = {
-    fontSize: '2.2rem',
-    fontWeight: 300,
-    lineHeight: 1.2,
-    letterSpacing: '-0.02em',
-    margin: '0 0 20px 0',
-    color: colors.textDark,
-  };
-
-  const headingStylee = {
-      fontSize: '2.5rem',
-      fontWeight: 900,
-      lineHeight: 1.2,
-      letterSpacing: '-0.02em',
-      margin: '0 0 20px 0',
-      color: colors.winkblue,
-  };
-
-  const ctaCopyStyle = {
-    fontSize: '1rem',
-    lineHeight: 0,
-    margin: '0 0 40px 0',
-    color: colors.textSecondary,
-  };
-
-  const buttonStyle = {
-    padding: '16px 44px',
-    fontSize: '0.82rem',
-    fontWeight: 700,
-    letterSpacing: '0.1em',
-    textTransform: 'uppercase',
-    border: `2px solid ${isHovering ? colors.primary : colors.textDark}`,
-    borderRadius: '8px',
-    cursor: 'pointer',
-    transition: 'all 0.3s ease',
-    fontFamily: 'inherit',
-    background: isHovering ? colors.primary : colors.textDark,
-    color: isHovering ? colors.textDark : colors.text,
-    transform: isHovering ? 'translateY(-2px)' : 'translateY(0)',
-    boxShadow: isHovering ? '0 8px 24px rgba(0, 0, 0, 0.12)' : 'none',
-  };
-
   return (
-    <section style={sectionStyle} ref={ref}>
-      <div style={bgStyle}>
-        <div style={gridOverlayStyle} />
+    <section className="stats-cta-section" ref={ref}>
+      <div className="stats-cta-bg">
+        <div className="stats-cta-grid-overlay" />
       </div>
 
-      <div style={innerStyle}>
-        <div style={labelRowStyle}>
-          <span style={labelLineStyle} />
-          <span style={labelTextStyle}>
+      <div className={`stats-cta-inner ${visible ? 'visible' : ''}`}>
+        <div className="stats-cta-label-row">
+          <span className="stats-cta-label-line" />
+          <span className="stats-cta-label-text">
             {stats.label}
           </span>
         </div>
 
-        <div style={ctaBlockStyle}>
-            <p style={headingStylee} > TRUSTED BY EXPORTERS WORLDWIDE </p>
-          <h2 style={headingStyle}>
+        <div className="stats-cta-block">
+          <p className="stats-cta-tagline">TRUSTED BY EXPORTERS WORLDWIDE</p>
+          <h2 className="stats-cta-heading">
             {d.headline}
           </h2>
-          <p style={ctaCopyStyle}>
+          <p className="stats-cta-copy">
             {d.copy}
           </p>
-          <p style={ctaCopyStyle}>
+          <p className="stats-cta-copy">
             {d.copy2}
           </p>
         </div>
 
-        <div style={statsGridStyle}>
-            {stats.items.map((item, i) => (
-                <div
-                   key={i}
-                   style={i === stats.items.length - 1 ? statCellLastStyle : statCellStyle}
-                >
-                <div style={statValueStyle}>
-                   {item.value}
-                   <span style={suffixStyle}>
-                       {item.suffix}
-                   </span>
-                </div>
-                  <div style={statSublabelStyle}>
-                   {item.label.toUpperCase()}
-                  </div>
-                </div>
-            ))}
+        <div className="stats-cta-grid">
+          {stats.items.map((item, i) => (
+            <div
+              key={i}
+              className="stats-cta-cell"
+            >
+              <div className="stats-cta-value">
+                {item.value}
+                <span className="stats-cta-suffix">
+                  {item.suffix}
+                </span>
+              </div>
+              <div className="stats-cta-sublabel">
+                {item.label.toUpperCase()}
+              </div>
+            </div>
+          ))}
         </div>
       </div>
+
+      <style jsx>{`
+        * {
+          box-sizing: border-box;
+        }
+
+        /* ===== SECTION CONTAINER ===== */
+        .stats-cta-section {
+          position: relative;
+          background: ${colors.surfaceLight};
+          padding: clamp(60px, 12vw, 120px) clamp(16px, 8vw, 80px);
+          width: 100%;
+          overflow: hidden;
+        }
+
+        .stats-cta-bg {
+          position: absolute;
+          inset: 0;
+          z-index: 0;
+        }
+
+        .stats-cta-grid-overlay {
+          position: absolute;
+          inset: 0;
+          background-image:
+            linear-gradient(rgba(0, 0, 0, 0.02) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(0, 0, 0, 0.02) 1px, transparent 1px);
+          background-size: clamp(40px, 10vw, 60px) clamp(40px, 10vw, 60px);
+          pointer-events: none;
+        }
+
+        /* ===== INNER CONTAINER ===== */
+        .stats-cta-inner {
+          position: relative;
+          z-index: 1;
+          max-width: 1200px;
+          margin: 0 auto;
+          width: 100%;
+          opacity: 0;
+          transform: translateY(40px);
+          transition: opacity 0.9s ease, transform 0.9s ease;
+        }
+
+        .stats-cta-inner.visible {
+          opacity: 1;
+          transform: translateY(0);
+        }
+
+        /* ===== LABEL ROW ===== */
+        .stats-cta-label-row {
+          display: flex;
+          align-items: center;
+          gap: clamp(8px, 3vw, 12px);
+          margin-bottom: clamp(32px, 6vw, 48px);
+          justify-content: center;
+        }
+
+        .stats-cta-label-line {
+          width: clamp(24px, 5vw, 32px);
+          height: 2px;
+          background: ${colors.primary};
+          box-shadow: 0 0 10px ${colors.primary};
+          flex-shrink: 0;
+        }
+
+        .stats-cta-label-text {
+          font-size: clamp(0.65rem, 2vw, 0.75rem);
+          font-weight: 700;
+          letter-spacing: 0.15em;
+          text-transform: uppercase;
+          color: ${colors.primary};
+          white-space: nowrap;
+        }
+
+        /* ===== CTA BLOCK ===== */
+        .stats-cta-block {
+          text-align: center;
+          max-width: 640px;
+          margin: 0 auto clamp(50px, 10vw, 100px);
+          padding: 0 clamp(16px, 4vw, 40px);
+        }
+
+        .stats-cta-tagline {
+          font-size: clamp(0.75rem, 2vw, 0.85rem);
+          font-weight: 700;
+          letter-spacing: 0.1em;
+          text-transform: uppercase;
+          color: ${colors.primary};
+          margin: 0 0 clamp(12px, 3vw, 16px) 0;
+        }
+
+        .stats-cta-heading {
+          font-size: clamp(1.6rem, 6vw, 2.5rem);
+          font-weight: 900;
+          line-height: 1.2;
+          letter-spacing: -0.02em;
+          margin: 0 0 clamp(16px, 3vw, 20px) 0;
+          color: ${colors.winkblue || colors.textDark};
+        }
+
+        .stats-cta-copy {
+          font-size: clamp(0.9rem, 2.5vw, 1rem);
+          line-height: 1.6;
+          margin: 0 0 clamp(12px, 2vw, 16px) 0;
+          color: ${colors.textSecondary || colors.textMuted};
+        }
+
+        .stats-cta-copy:last-of-type {
+          margin-bottom: 0;
+        }
+
+        /* ===== STATS GRID ===== */
+        .stats-cta-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+          border: 1px solid ${colors.borderLight};
+          border-radius: clamp(8px, 2vw, 12px);
+          overflow: hidden;
+          background: ${colors.surfaceWhite};
+          box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04);
+          width: 100%;
+        }
+
+        .stats-cta-cell {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          padding: clamp(30px, 6vw, 60px) clamp(16px, 4vw, 40px);
+          border-right: 1px solid ${colors.borderLight};
+          text-align: center;
+          transition: all 0.3s ease;
+          gap: clamp(8px, 2vw, 12px);
+        }
+
+        .stats-cta-cell:last-child {
+          border-right: none;
+        }
+
+        .stats-cta-cell:hover {
+          background: rgba(0, 0, 0, 0.02);
+        }
+
+        /* ===== STAT VALUE ===== */
+        .stats-cta-value {
+          font-size: clamp(2rem, 8vw, 4rem);
+          font-weight: 300;
+          line-height: 1;
+          letter-spacing: -0.02em;
+          color: ${colors.textDark};
+          display: flex;
+          align-items: baseline;
+          gap: clamp(4px, 1vw, 8px);
+          justify-content: center;
+        }
+
+        .stats-cta-suffix {
+          font-size: clamp(0.5rem, 2vw, 0.65em);
+          font-weight: 700;
+          letter-spacing: 0.05em;
+          color: ${colors.primary};
+        }
+
+        /* ===== STAT LABEL ===== */
+        .stats-cta-sublabel {
+          font-size: clamp(0.65rem, 1.8vw, 0.8rem);
+          font-weight: 900;
+          letter-spacing: 0.12em;
+          text-transform: uppercase;
+          color: ${colors.textMuted};
+        }
+
+        /* ===== SMALL DEVICES (Mobile) ===== */
+        @media (max-width: 480px) {
+          .stats-cta-section {
+            padding: 50px 16px;
+          }
+
+          .stats-cta-grid {
+            grid-template-columns: 1fr;
+          }
+
+          .stats-cta-cell {
+            padding: 24px 20px;
+            border-right: none;
+            border-bottom: 1px solid ${colors.borderLight};
+          }
+
+          .stats-cta-cell:last-child {
+            border-bottom: none;
+          }
+
+          .stats-cta-label-row {
+            margin-bottom: 24px;
+          }
+
+          .stats-cta-block {
+            margin-bottom: 40px;
+            padding: 0 12px;
+          }
+        }
+
+        /* ===== SMALL-MEDIUM DEVICES (Large Mobile / Small Tablet) ===== */
+        @media (min-width: 481px) and (max-width: 640px) {
+          .stats-cta-grid {
+            grid-template-columns: repeat(2, 1fr);
+          }
+
+          .stats-cta-cell {
+            border-bottom: 1px solid ${colors.borderLight};
+            padding: 36px 24px;
+          }
+
+          .stats-cta-cell:nth-child(odd):last-child {
+            border-right: none;
+          }
+
+          .stats-cta-cell:nth-child(2n) {
+            border-right: none;
+          }
+
+          .stats-cta-cell:nth-last-child(-n + 2) {
+            border-bottom: none;
+          }
+        }
+
+        /* ===== MEDIUM DEVICES (Tablet) ===== */
+        @media (min-width: 641px) and (max-width: 1024px) {
+          .stats-cta-grid {
+            grid-template-columns: repeat(2, 1fr);
+          }
+
+          .stats-cta-section {
+            padding: 80px 32px;
+          }
+
+          .stats-cta-cell {
+            border-right: none;
+            border-bottom: 1px solid ${colors.borderLight};
+            padding: 48px 32px;
+          }
+
+          .stats-cta-cell:nth-last-child(-n + 2) {
+            border-bottom: none;
+          }
+        }
+
+        /* ===== LARGE DEVICES (Desktop) ===== */
+        @media (min-width: 1025px) {
+          .stats-cta-grid {
+            grid-template-columns: repeat(3, 1fr);
+          }
+
+          .stats-cta-section {
+            padding: 120px 80px;
+          }
+
+          .stats-cta-cell {
+            border-right: 1px solid ${colors.borderLight};
+          }
+
+          .stats-cta-cell:last-child {
+            border-right: none;
+          }
+        }
+
+        /* ===== EXTRA LARGE DEVICES ===== */
+        @media (min-width: 1440px) {
+          .stats-cta-section {
+            padding: 120px 120px;
+          }
+        }
+      `}</style>
     </section>
   );
 }
