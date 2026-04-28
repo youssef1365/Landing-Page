@@ -37,8 +37,8 @@ export default function StatsAndCta({ userType, onApply }) {
   const [isHovering, setIsHovering] = useState(false);
   const width = useWindowWidth();
 
-  const isMobile = width <= 768;
   const isSmall  = width <= 480;
+  const isMobile = width <= 768;
   const isTablet = width <= 1024;
 
   const sectionStyle = {
@@ -87,7 +87,7 @@ export default function StatsAndCta({ userType, onApply }) {
     display: 'flex',
     alignItems: 'center',
     gap: '12px',
-    marginBottom: '48px',
+    marginBottom: isMobile ? '28px' : '48px',
     justifyContent: 'center',
   };
 
@@ -96,6 +96,7 @@ export default function StatsAndCta({ userType, onApply }) {
     height: '1px',
     background: colors.primary,
     boxShadow: `0 0 10px ${colors.primary}`,
+    flexShrink: 0,
   };
 
   const labelTextStyle = {
@@ -104,6 +105,40 @@ export default function StatsAndCta({ userType, onApply }) {
     letterSpacing: '0.15em',
     textTransform: 'uppercase',
     color: colors.primary,
+  };
+
+  const ctaBlockStyle = {
+    textAlign: 'center',
+    maxWidth: isMobile ? '100%' : '640px',
+    width: '100%',
+    margin: '0 auto',
+    marginBottom: isMobile ? '32px' : '0',
+    boxSizing: 'border-box',
+  };
+
+  const headingStylee = {
+    fontSize: isSmall ? '1.2rem' : isMobile ? '1.5rem' : '2.5rem',
+    fontWeight: 900,
+    lineHeight: 1.2,
+    letterSpacing: '-0.02em',
+    margin: '0 0 16px 0',
+    color: colors.winkblue,
+  };
+
+  const headingStyle = {
+    fontSize: isSmall ? '1.3rem' : isMobile ? '1.6rem' : '2.2rem',
+    fontWeight: 300,
+    lineHeight: 1.3,
+    letterSpacing: '-0.02em',
+    margin: '0 0 16px 0',
+    color: colors.textDark,
+  };
+
+  const ctaCopyStyle = {
+    fontSize: isSmall ? '0.85rem' : '1rem',
+    lineHeight: 1.6,
+    margin: '0 0 16px 0',
+    color: colors.textSecondary,
   };
 
   const statsGridStyle = {
@@ -116,7 +151,8 @@ export default function StatsAndCta({ userType, onApply }) {
     border: `1px solid ${colors.borderLight}`,
     borderRadius: '12px',
     overflow: 'hidden',
-    marginBottom: '100px',
+    marginBottom: isMobile ? '40px' : '100px',
+    marginTop: isMobile ? '32px' : '60px',
     background: colors.surfaceWhite,
     boxShadow: '0 4px 24px rgba(0, 0, 0, 0.04)',
   };
@@ -146,10 +182,10 @@ export default function StatsAndCta({ userType, onApply }) {
   });
 
   const statValueStyle = {
-    fontSize: isSmall ? '2rem' : '4rem',
+    fontSize: isSmall ? '2.2rem' : isMobile ? '2.8rem' : '4rem',
     fontWeight: 300,
     lineHeight: 1,
-    marginBottom: '20px',
+    marginBottom: '12px',
     letterSpacing: '-0.02em',
     color: colors.textDark,
   };
@@ -168,39 +204,8 @@ export default function StatsAndCta({ userType, onApply }) {
     color: colors.textMuted,
   };
 
-  const ctaBlockStyle = {
-    textAlign: 'center',
-    maxWidth: '640px',
-    margin: '0 auto',
-  };
-
-  const headingStyle = {
-    fontSize: isSmall ? '1.6rem' : '2.2rem',
-    fontWeight: 300,
-    lineHeight: 1.2,
-    letterSpacing: '-0.02em',
-    margin: '0 0 20px 0',
-    color: colors.textDark,
-  };
-
-  const headingStylee = {
-    fontSize: isSmall ? '1.4rem' : '2.5rem',
-    fontWeight: 900,
-    lineHeight: 1.2,
-    letterSpacing: '-0.02em',
-    margin: '0 0 20px 0',
-    color: colors.winkblue,
-  };
-
-  const ctaCopyStyle = {
-    fontSize: isSmall ? '0.9rem' : '1rem',
-    lineHeight: 0,
-    margin: '0 0 40px 0',
-    color: colors.textSecondary,
-  };
-
   const buttonStyle = {
-    padding: '16px 44px',
+    padding: isSmall ? '14px 28px' : '16px 44px',
     fontSize: '0.82rem',
     fontWeight: 700,
     letterSpacing: '0.1em',
@@ -214,6 +219,7 @@ export default function StatsAndCta({ userType, onApply }) {
     color: isHovering ? colors.textDark : colors.text,
     transform: isHovering ? 'translateY(-2px)' : 'translateY(0)',
     boxShadow: isHovering ? '0 8px 24px rgba(0, 0, 0, 0.12)' : 'none',
+    width: isSmall ? '100%' : 'auto',
   };
 
   return (
