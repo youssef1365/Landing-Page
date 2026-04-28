@@ -35,6 +35,7 @@ export default function EventOverview({ userType }) {
               <h2 className="overview-headline">{data.headline}</h2>
               <div className="headline-underline" />
               <p className="overview-sub">{data.subheadline}</p>
+              <p className="overview-sub">{data.subhead2}</p>
             </div>
 
             <div className="overview-right">

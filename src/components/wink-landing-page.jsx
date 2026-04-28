@@ -6,10 +6,14 @@ import ApplicationForms from './ApplicationForms';
 import { siteConfig } from '../config/siteConfig.js';
 import Journey from './Journey.jsx'
 import StatsAndCta from './Statsandcta.jsx';
+import WhyJoin from './WhyJoin.jsx'
 
 export default function WinkLandingPage({userType}) {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+
+
+   const { colors } = siteConfig;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -22,10 +26,9 @@ export default function WinkLandingPage({userType}) {
 
       <header className={`header ${scrolled ? 'scrolled' : ''}`}>
         <div className="header-inner">
-          <div className="logo">
-            <span className="logo-mark" />
-            <span className="logo-text">{siteConfig.header.logo}</span>
-          </div>
+         <div className="logo">
+           <img src={siteConfig.header.logoImage} alt="WINK Logo" className="logo-img" />
+         </div>
 
           <nav className="nav">
             {siteConfig.header.nav.map((link, i) => (
@@ -61,6 +64,7 @@ export default function WinkLandingPage({userType}) {
       <div id="EventOverview"><EventOverview userType={userType}/></div>
       <div id="ParticipantProfiles"><ParticipantProfiles userType={userType}/></div>
       <div id="Journey"><Journey userType={userType}/></div>
+      <div id="WhyJoin"><WhyJoin userType={userType}/></div>
       <div id="StatsAndCta"><StatsAndCta userType={userType}  /></div>
       <div id="ApplicationForms"><ApplicationForms userType={userType}/></div>
 
@@ -72,9 +76,8 @@ export default function WinkLandingPage({userType}) {
         <div className="footer-inner">
           <div className="footer-top">
             <div className="footer-brand">
-              <div className="footer-logo">
-                <span className="footer-logo-mark" />
-                <span className="footer-logo-text">{siteConfig.footer.sections[0].title}</span>
+              <div className="logo">
+                <img src={siteConfig.header.logoImage} alt="WINK Logo" className="logo-img" />
               </div>
               <p className="footer-brand-desc">{siteConfig.footer.sections[0].description}</p>
               <div className="footer-badge">
@@ -100,10 +103,24 @@ export default function WinkLandingPage({userType}) {
               </ul>
             </div>
 
-            <div className="footer-contact-col">
+            <div className="footer-links-col">
               <p className="footer-col-title">{siteConfig.footer.sections[2].title}</p>
+              <ul className="footer-links">
+                {siteConfig.footer.sections[2].links.map((link, i) => (
+                  <li key={i}>
+                    <a href={link.href} target="_blank" rel="noopener noreferrer">
+                      <span className="link-arrow">→</span>
+                      {link.text}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="footer-contact-col">
+              <p className="footer-col-title">{siteConfig.footer.sections[3].title}</p>
               <div className="footer-contact-items">
-                {siteConfig.footer.sections[2].contactInfo.map((info, i) => (
+                {siteConfig.footer.sections[3].contactInfo.map((info, i) => (
                   <div key={i} className="contact-item">
                     <span className="contact-label">{info.label}</span>
                     <span className="contact-value">{info.value}</span>
@@ -117,7 +134,7 @@ export default function WinkLandingPage({userType}) {
             <p className="footer-copy">{siteConfig.footer.copyright}</p>
             <div className="footer-bottom-badge">
               <span className="bottom-dot green" />
-              <span>Programme currently accepting applications</span>
+              <span>Program currently accepting applications</span>
             </div>
           </div>
         </div>
@@ -161,6 +178,18 @@ export default function WinkLandingPage({userType}) {
           display: flex;
           align-items: center;
           gap: 10px;
+          cursor: pointer;
+          transition: opacity 0.2s ease;
+        }
+
+        .logo:hover {
+          opacity: 0.8;
+        }
+
+        .logo-img {
+          height: 60px;
+          width: auto;
+          object-fit: contain;
         }
 
         .logo-mark {
@@ -221,7 +250,7 @@ export default function WinkLandingPage({userType}) {
 
         .nav-cta {
           padding: 9px 22px;
-          background: #1a6e4a;
+          background: ${colors.primary};
           color: white;
           border-radius: 6px;
           font-size: 0.78rem;
@@ -332,7 +361,7 @@ export default function WinkLandingPage({userType}) {
 
         .footer-top {
           display: grid;
-          grid-template-columns: 2fr 1fr 1fr;
+          grid-template-columns: 2fr 1fr 1fr 1fr;
           gap: 60px;
           padding-bottom: 60px;
           border-bottom: 1px solid rgba(255,255,255,0.06);
@@ -515,6 +544,17 @@ export default function WinkLandingPage({userType}) {
             flex-direction: column;
             gap: 16px;
             text-align: center;
+          }
+          .logo {
+            gap: 8px;
+          }
+
+          .logo-img {
+            height: 32px;
+          }
+
+          .logo-text {
+            font-size: 0.9rem;
           }
         }
       `}</style>

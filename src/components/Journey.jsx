@@ -31,30 +31,21 @@ export default function Journey({ userType, onApply }) {
       <section className="journey" ref={ref} id={`${userType === 'seller' ? 'Seller' : 'Buyer'}Journey`}>
         <div className={`wrap ${visible ? 'visible' : ''}`}>
 
-          {/* ── Row 1: top intro (full width, left col only) ── */}
           <div className="top-intro">
-            <div className="eyebrow">
-              <span className="dot" />
-              <span className="eyebrow-label">For {userType === 'seller' ? 'Sellers' : 'Buyers'}</span>
-            </div>
-            <h2>{d.cta.headline}</h2>
+            <span className="dot" />
             <div className="accent-bar" />
+            <h2>{d.cta.headline}</h2>
+
             <p className="desc">{d.cta.copy}</p>
           </div>
 
-          {/* ── Row 2: two col titles on same line ── */}
           <div className="two-col">
             <div className="col-left">
               <p className="section-label">{d.cta.processLabel.toUpperCase()}</p>
               <h3>How it works</h3>
             </div>
-            <div className="col-right">
-              <p className="section-label">{d.whyJoin.label.toUpperCase()}</p>
-              <h3>{d.whyJoin.headline}</h3>
-            </div>
           </div>
 
-          {/* ── Row 3: two col content ── */}
           <div className="two-col two-col-content">
             <div className="col-left">
               <div className="steps-card">
@@ -68,23 +59,12 @@ export default function Journey({ userType, onApply }) {
                   </div>
                 ))}
               </div>
-              <button className="btn" onClick={() => onApply?.(userType)}>
-                {d.cta.button.toUpperCase()}
-              </button>
             </div>
 
-            <div className="col-right">
-              <div className="why-list">
-                {d.whyJoin.reasons.map((r, i) => (
-                  <div key={i} className="why-item">
-                    <span className="check" />
-                    <span className="why-text">{r}</span>
-                  </div>
-                ))}
-              </div>
+            <div className={`process-image ${visible ? 'visible' : ''}`}>
+              <img src={d.process.image} alt={d.process.imageAlt} />
             </div>
           </div>
-
         </div>
       </section>
 
@@ -110,7 +90,6 @@ export default function Journey({ userType, onApply }) {
           transform: translateY(0);
         }
 
-        /* ── Top intro (left half width) ── */
         .top-intro {
           width: 50%;
           padding-right: 40px;
@@ -128,20 +107,18 @@ export default function Journey({ userType, onApply }) {
 
         .desc { font-size: 1.05rem; color: #94aec4; line-height: 1.75; margin: 0; }
 
-        /* ── Two col rows ── */
         .two-col {
           display: grid;
           grid-template-columns: 1fr 1fr;
           gap: 48px;
         }
 
-        .two-col-content { margin-top: 20px; }
+        .two-col-content { margin-top: 20px; align-items: start; }
 
         .section-label { font-size: 11px; font-weight: 600; letter-spacing: 0.18em; color: #4dd9ac; margin: 0 0 12px 0; text-transform: uppercase; }
 
         h3 { font-size: 1.8rem; font-weight: 300; color: #ffffff; line-height: 1.2; letter-spacing: -0.02em; margin: 0; }
 
-        /* ── Steps ── */
         .steps-card { border: 1px solid rgba(77, 217, 172, 0.15); border-radius: 8px; overflow: hidden; margin-bottom: 32px; }
         .step-row { display: flex; align-items: center; gap: 20px; padding: 18px 24px; background: rgba(255,255,255,0.02); transition: background 0.2s; }
         .step-row:hover { background: rgba(77, 217, 172, 0.05); }
@@ -154,7 +131,6 @@ export default function Journey({ userType, onApply }) {
         .btn { padding: 15px 36px; background: #4dd9ac; color: #0d1b2e; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.1em; border: none; border-radius: 6px; cursor: pointer; text-transform: uppercase; transition: background 0.2s, transform 0.15s; }
         .btn:hover { background: #3bc99c; transform: translateY(-2px); }
 
-        /* ── Why list ── */
         .why-list { display: flex; flex-direction: column; }
         .why-item { display: flex; align-items: flex-start; gap: 14px; padding: 16px 0; border-bottom: 1px solid rgba(77, 217, 172, 0.08); }
         .why-item:first-child { border-top: 1px solid rgba(77, 217, 172, 0.08); }
@@ -162,11 +138,35 @@ export default function Journey({ userType, onApply }) {
         .check::after { content: ''; position: absolute; top: 6px; left: 5px; width: 10px; height: 5px; border-left: 2px solid #4dd9ac; border-bottom: 2px solid #4dd9ac; transform: rotate(-45deg); }
         .why-text { font-size: 0.95rem; color: #d0dde8; line-height: 1.55; }
 
+        .process-image {
+          position: sticky;
+          top: 80px;
+          opacity: 0;
+          transform: translateX(30px);
+          transition: opacity 0.7s ease 0.3s, transform 0.7s ease 0.3s;
+        }
+
+        .process-image.visible {
+          opacity: 1;
+          transform: translateX(0);
+        }
+
+        .process-image img {
+          width: 100%;
+          height: 420px;
+          object-fit: cover;
+          display: block;
+          border-radius: 12px;
+          border: 1px solid rgba(77, 217, 172, 0.15);
+        }
+
         @media (max-width: 900px) {
           .journey { padding: 64px 24px; }
           .top-intro { width: 100%; padding-right: 0; }
           .two-col { grid-template-columns: 1fr; gap: 32px; }
           h2 { font-size: 2.2rem; }
+          .process-image { position: static; }
+          .process-image img { height: 240px; }
         }
       `}</style>
     </>

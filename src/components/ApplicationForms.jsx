@@ -67,11 +67,11 @@ export default function ApplicationForms({ userType }) {
           <div className="appforms-left">
             <div className="left-label">
               <span className="label-line" />
-              <span className="label-text">Join the Programme</span>
+              <span className="label-text">Join the Program</span>
             </div>
-            <h2>Apply to the West Africa Market Entry Programme</h2>
+            <h2>Apply to the West Africa Market Entry Program</h2>
             <p className="left-desc">
-              A selective programme connecting companies with pre-qualified West African buyers, distributors and partners.
+              A selective program connecting companies with pre-qualified West African buyers, distributors and partners.
             </p>
 
             {userType === 'seller' && (

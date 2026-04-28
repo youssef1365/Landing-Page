@@ -2,7 +2,7 @@ export const siteConfig = {
   branding: {
     eventName: "West Africa Market Entry Program",
     eventTagline: "Accra, June 2026",
-    description: "8–10 pre-qualified B2B meetings with West African buyers, distributors and partners across agrifood, construction, technology, and financial services.",
+    description: "The Fastest Way to Enter West African Markets. A curated B2B program connecting international companies with pre-qualified West African buyers and partners — through structured, high-impact meetings.",
     logo: "West Africa Market Entry Program",
     favicon: "/winklogo.png",
   },
@@ -11,6 +11,7 @@ export const siteConfig = {
   colors: {
     // Primary palette
     primary: "#4dd9ac",
+    winkblue: "#003F5C",
     primaryDark: "#1a6e4a",
     primaryLight: "#c8a84b",
 
@@ -42,11 +43,12 @@ export const siteConfig = {
 
 
   header: {
-    logo: "West Africa Market Entry Program",
+    logoImage: "/winkWhite.png",
     nav: [
-      { text: "About", href: "#EventOverview" },
+      { text: "Program", href: "#EventOverview" },
       { text: "Participants", href: "#ParticipantProfiles" },
-      { text: "Apply", href: "#ApplicationForms" },
+      { text: "Process", href: "#Journey"},
+      { text: "Why Join", href: "#WhyJoin"},
     ],
   },
 
@@ -56,10 +58,10 @@ export const siteConfig = {
       headlinePlain: "Enter West African Markets",
       headlineAccent: "Through Qualified Buyers.",
       subheadline: "Meet pre-qualified West African buyers through structured, high-impact B2B meetings designed to generate real deals.",
-      ctaPrimary: { text: "Apply as a Company", target: "seller" },
-      ctaSecondary: { text: "How it works", target: "seller" },
+      ctaPrimary: { text: "Apply", target: "ApplicationForms" },
+      ctaSecondary: { text: "How it works", target: "Journey" },
       useBackgroundImage: true,
-      backgroundImage: "/img.png",
+      backgroundImage: "/hero-seller.png",
       stats: [
         { value: "25 & 26 June", label: "Event Dates" },
         { value: "Kempinski Hotel Gold Coast City", label: "Accra, Ghana" },
@@ -73,9 +75,9 @@ export const siteConfig = {
       headlineAccent: " Curated B2B Program ",
       subheadline: "Meet qualified food exporters from Egypt, France, Spain, Canada, the USA, Morocco, and Italy through structured, high-impact B2B meetings.",
       ctaPrimary: { text: "Join as Buyer", target: "buyer" },
-      ctaSecondary: { text: "How it works", target: "buyer" },
+      ctaSecondary: { text: "How it works", target: "Journey" },
       useBackgroundImage: true,
-      backgroundImage: "/img.png",
+      backgroundImage: "/hero-buyer.png",
       stats: [
         { value: "25 & 26 June", label: "Event Dates" },
         { value: "Kempinski Hotel Gold Coast City", label: "Accra, Ghana" },
@@ -89,8 +91,9 @@ export const siteConfig = {
     seller: {
       label: "The Program",
       headline: "Structured meetings. Zero wasted time.",
-      subheadline: "WINK's curated B2B trade missions are built for companies ready to access new export markets. Your agenda is prepared before you arrive — you walk in knowing exactly who you meet and why. Every buyer is pre-screened and matched to your product profile.",
-      featuretitle: "Who will you Meet",
+      subheadline: "WINK's curated B2B trade missions are built for companies ready to access new export markets. Your agenda is prepared before you arrive — you walk in knowing exactly who you meet and why.",
+      subhead2: "Every buyer is pre-screened and matched to your product profile.",
+      featuretitle: "What you Get",
       features: [
         "Pre-scheduled B2B meetings — your agenda is confirmed before departure",
         "Carefully selected participants across the agrofood value chain",
@@ -170,14 +173,15 @@ export const siteConfig = {
 
   sellerJourney: {
     cta: {
-      headline: "Apply to Join as a Seller.",
+      headline: "Apply to Join as an Exporter.",
       copy: "We select a limited number of companies for each program to ensure maximum value and focus. Apply now to secure your place and start meeting pre-qualified West African buyers.",
       processLabel: "Selection Process",
-      button: "Apply Now",
     },
     process: {
       label: "The Process",
       headline: "How it works",
+      image: "/how-it-works-seller.jpg",
+      imageAlt: "Seller meeting process at WINK B2B program",
       steps: [
         { number: "1", title: "Submit Your Application", description: "A short form — takes 5 minutes. We review every application personally." },
         { number: "2", title: "Qualification Call with Our Team", description: "A 20-minute call to understand your products, targets, and readiness for the Ghanaian market." },
@@ -187,17 +191,19 @@ export const siteConfig = {
     whyJoin: {
       label: "Why Join",
       headline: "Why Sellers Choose WINK",
+      image: "/howsller.jpeg",
+      imageAlt: "International sellers meeting West African buyers at WINK event",
       reasons: [
-        "No wasted meetings.Every buyer is screened and matched to your product profile before the program.",
-        "Your agenda is ready before you land. Meetings are pre-scheduled — you know exactly who you meet and when.",
-        "Real decision-makers only. No intermediaries, no assistants — only buyers with mandate and budget authority.",
-        "30,000+ meetings organized. WINK has been running curated B2B trade missions across 30+ countries for over a decade.",
+        {title: "No wasted meetings.", desc : "Every buyer is screened and matched to your product profile before the program."},
+        {title:"Your agenda is ready before you land.", desc : " Meetings are pre-scheduled — you know exactly who you meet and when."},
+        {title:"Real decision-makers only.", desc : " No intermediaries, no assistants — only buyers with mandate and budget authority."},
+        {title:"30,000+ meetings organized.", desc : " WINK has been running curated B2B trade missions across 30+ countries for over a decade."},
       ],
     },
     finalCta: {
-      headline: "Secure Your Place in the Programme",
-      copy: "Limited company slots available. Apply now and our team will be in touch within 48 hours.",
-      button: "Apply Now",
+      headline: "Secure Your Place in the Program",
+      copy: "Limited company slots available.",
+      copy2: "Apply now and our team will be in touch within 48 hours.",
     },
   },
 
@@ -211,6 +217,8 @@ export const siteConfig = {
     process: {
       label: "The Process",
       headline: "How it works",
+      image: "/how-it-works-buyer.png",
+      imageAlt: "Buyer meeting schedule and process at WINK B2B program",
       steps: [
         { number: "1", title: "Apply", description: "Submit your request and specify the products you are looking for." },
         { number: "2", title: "Qualification", description: "Your profile is reviewed to ensure alignment with the program." },
@@ -222,17 +230,20 @@ export const siteConfig = {
     whyJoin: {
       label: "Why Join",
       headline: "Why join as a buyer",
+      image: "/why-join-buyer.png",
+      imageAlt: "Ghanaian buyers discovering international suppliers at WINK event",
       reasons: [
-        "Meet international suppliers in one place",
-        "Save time with pre-arranged meetings",
-        "Access verified exporters ready to work with Ghana",
-        "Discover new products and competitive offers",
-        "Build direct, long-term partnerships",
+        { title: "Meet international suppliers in one place"},
+        { title:"Save time with pre-arranged meetings"},
+        { title:"Access verified exporters ready to work with Ghana"},
+        { title:"Discover new products and competitive offers"},
+        { title:"Build direct, long-term partnerships"},
       ],
     },
     finalCta: {
       headline: "Secure Your Meetings with International Suppliers",
-      copy: "Limited seats available for Ghanaian buyers. Apply now to receive your personalized meeting agenda.",
+      copy: "Limited seats available for Ghanaian buyers.",
+      copy2: "Apply now to receive your personalized meeting agenda.",
       button: "Request Participation",
     },
   },
@@ -267,19 +278,20 @@ export const siteConfig = {
       ctaButton: "Request Access",
       fields: [
         { name: "companyName", label: "Company Name", type: "text", required: true, placeholder: "Your company name" },
+        { name: "contactName", label: "Contact Name", type: "text", required: false, placeholder: "Your name" },
         { name: "roleTitle", label: "Role / Title", type: "text", required: true, placeholder: "e.g., Procurement Manager" },
-        { name: "industry", label: "Industry", type: "select", required: true, placeholder: "Select your industry" },
-        { name: "lookingToSource", label: "What are you looking to source?", type: "text", required: true, placeholder: "Describe your sourcing needs" },
-        { name: "currentProjects", label: "Current Projects / Needs", type: "textarea", required: false, placeholder: "Tell us about your current projects" },
-        { name: "budgetRange", label: "Budget Range", type: "select", required: false, placeholder: "Select budget range" },
-        { name: "timeline", label: "Timeline", type: "select", required: false, placeholder: "Select timeline" },
         { name: "email", label: "Email", type: "email", required: true, placeholder: "your@email.com" },
         { name: "phone", label: "Phone", type: "tel", required: true, placeholder: "Your phone number" },
+        { name: "industry", label: "Industry", type: "select", required: true, placeholder: "Select your industry" },
+        { name: "budgetRange", label: "Import annual range", type: "select", required: false, placeholder: "Select import range" },
+        { name: "timeline", label: "Timeline", type: "select", required: false, placeholder: "Select timeline" },
+        { name: "lookingToSource", label: "What are you looking to source?", type: "textarea", required: true, placeholder: "Describe your sourcing needs" },
+
       ],
     },
     selectOptions: {
-      industries: ["Agrifood", "Construction", "Technology", "Financial Services", "FMCG", "Distribution", "Retail", "Other"],
-      budgetRanges: ["Under $50K", "$50K - $100K", "$100K - $500K", "$500K - $1M", "Over $1M"],
+      industries: ["Agri/food", "Construction", "Technology", "Financial Services", "FMCG", "Distribution", "Retail", "Other"],
+      budgetRanges: ["Less 1M$", "1M$ - 10M$", " More than 10M$"],
       timelines: ["Immediate", "1-3 months", "3-6 months", "6-12 months"],
     },
   },
@@ -287,7 +299,7 @@ export const siteConfig = {
   footer: {
     sections: [
       {
-        title: "West Africa Market Entry Program",
+        title: "Wink",
         description: "Pre-qualified B2B meetings with West African buyers, distributors and partners. Accra, June 2026.",
       },
       {
@@ -295,14 +307,23 @@ export const siteConfig = {
         links: [
           { text: "About", href: "#EventOverview" },
           { text: "Participants", href: "#ParticipantProfiles" },
-          { text: "Apply", href: "#ApplicationForms" },
+          { text: "Process", href: "#Journey" },
+        ],
+      },
+      {
+        title: "Wink",
+        links: [
+          { text: "Wink Consulting", href: "https://www.wink-consulting.com" },
+          { text: "About Us", href: "https://www.wink-consulting.com/AboutUs" },
+          { text: "Past Missions", href: "https://www.wink-consulting.com/Event" },
+
         ],
       },
       {
         title: "Contact",
         contactInfo: [
-          { label: "Email", value: "info@westafricaprogram.com" },
-          { label: "Phone", value: "+1 (555) 123-4567" },
+          { label: "Email", value: "winkevents@wink-consulting.com" },
+          { label: "Phone", value: "+212 6 69 27 00 75" },
         ],
       },
     ],

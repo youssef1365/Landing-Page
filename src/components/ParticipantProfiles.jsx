@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { siteConfig } from '../config/siteConfig';
+import { Users, Building2, Truck, TrendingUp } from 'lucide-react';
 
 export default function ParticipantProfiles({ userType }) {
-  const { colors } = siteConfig;
   const data = siteConfig.participantProfiles[userType];
   const [visible, setVisible] = useState(false);
   const ref = useRef(null);
@@ -16,296 +16,262 @@ export default function ParticipantProfiles({ userType }) {
     return () => observer.disconnect();
   }, []);
 
-  const sectors = [...data.sectorsCovered, ...data.sectorsCovered];
+  const icons = [Users, Building2, Truck, TrendingUp];
 
   return (
-    <section
-      ref={ref}
-      id="ParticipantProfiles"
-      style={{
-        background: colors.surfaceWhite,
-        padding: '100px 80px',
-        borderTop: `1px solid ${colors.borderLight}`,
-        width: '100%',
-        boxSizing: 'border-box',
-      }}
-    >
-      <div
-        className="profiles-inner"
-        style={{
-          maxWidth: '1400px',
-          margin: '0 auto',
-          opacity: visible ? 1 : 0,
-          transform: visible ? 'translateY(0)' : 'translateY(24px)',
-          transition: 'opacity 0.8s ease, transform 0.8s ease',
-        }}
+    <>
+      <section
+        ref={ref}
+        id="ParticipantProfiles"
+        className="participant-section"
       >
-
-        {/* Eyebrow Label */}
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '10px',
-            marginBottom: '32px',
-            justifyContent: 'center',
-          }}
-        >
-          <span
-            style={{
-              width: '8px',
-              height: '8px',
-              borderRadius: '50%',
-              background: colors.primaryDark,
-              flexShrink: 0,
-            }}
-          />
-          <span
-            style={{
-              fontSize: '0.75rem',
-              fontWeight: 700,
-              letterSpacing: '0.13em',
-              textTransform: 'uppercase',
-              color: colors.textMuted,
-            }}
-          >
-            Who attends
-          </span>
-        </div>
-
-        {/* Header - Centered */}
-        <div
-          style={{
-            marginBottom: '72px',
-            textAlign: 'center',
-            maxWidth: '900px',
-            margin: '0 auto 72px',
-          }}
-        >
-          <h2
-            style={{
-              fontSize: '3rem',
-              fontWeight: 400,
-              color: colors.textDark,
-              lineHeight: 1.2,
-              letterSpacing: '-0.02em',
-              marginBottom: '16px',
-            }}
-          >
-            {data.headline}
-          </h2>
-          <p
-            style={{
-              fontSize: '1.1rem',
-              color: colors.textSecondary,
-              lineHeight: 1.7,
-              margin: 0,
-            }}
-          >
-            {data.subheadline}
-          </p>
-        </div>
-
-        {/* Who You Will Meet Section */}
-        <div style={{ marginBottom: '80px' }}>
-          <p
-            style={{
-              fontSize: '0.75rem',
-              fontWeight: 700,
-              letterSpacing: '0.12em',
-              textTransform: 'uppercase',
-              color: colors.primary,
-              marginBottom: '28px',
-              textAlign: 'center',
-            }}
-          >
-            Who you will meet
-          </p>
-
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
-              gap: '20px',
-              maxWidth: '1300px',
-              margin: '0 auto',
-            }}
-          >
-            {data.whoYouWillMeet.map((item, i) => (
-              <div
-                key={i}
-                style={{
-                  background: colors.surfaceWhite,
-                  border: `1px solid ${colors.borderDarker}`,
-                  borderRadius: '12px',
-                  padding: '24px',
-                  display: 'flex',
-                  alignItems: 'flex-start',
-                  gap: '16px',
-                  transition: 'all 0.3s ease',
-                  cursor: 'pointer',
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.borderColor = colors.primary;
-                  e.currentTarget.style.boxShadow = `0 8px 24px rgba(77, 217, 172, 0.12)`;
-                  e.currentTarget.style.transform = 'translateY(-4px)';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor = colors.borderDarker;
-                  e.currentTarget.style.boxShadow = 'none';
-                  e.currentTarget.style.transform = 'translateY(0)';
-                }}
-              >
-                <span
-                  style={{
-                    width: '10px',
-                    height: '10px',
-                    borderRadius: '50%',
-                    background: colors.primaryDark,
-                    marginTop: '6px',
-                    flexShrink: 0,
-                  }}
-                />
-                <span
-                  style={{
-                    fontSize: '0.95rem',
-                    fontWeight: 500,
-                    color: colors.textDark,
-                    lineHeight: 1.5,
-                  }}
-                >
-                  {item}
-                </span>
-              </div>
-            ))}
+        <div className="participant-wrap">
+          {/* Eyebrow Label */}
+          <div className="eyebrow">
+            <span className="eyebrow-dot" />
+            <span className="eyebrow-text">Who attends</span>
           </div>
-        </div>
 
-        {/* Sectors Covered Section */}
-        <div>
-          <p
-            style={{
-              fontSize: '0.75rem',
-              fontWeight: 700,
-              letterSpacing: '0.12em',
-              textTransform: 'uppercase',
-              color: colors.primary,
-              marginBottom: '28px',
-              textAlign: 'center',
-            }}
-          >
-            Sectors covered
-          </p>
+          {/* Header */}
+          <div className="participant-header">
+            <h1>{data.headline}</h1>
+            <p>{data.subheadline}</p>
+          </div>
 
-          <div
-            style={{
-              overflow: 'hidden',
-              borderTop: `1px solid ${colors.borderLight}`,
-              borderBottom: `1px solid ${colors.borderLight}`,
-              position: 'relative',
-              maxWidth: '100%',
-            }}
-          >
-            {/* Left Fade */}
-            <div
-              style={{
-                position: 'absolute',
-                left: 0,
-                top: 0,
-                bottom: 0,
-                width: '60px',
-                background: `linear-gradient(to right, ${colors.surfaceWhite}, transparent)`,
-                zIndex: 2,
-                pointerEvents: 'none',
-              }}
-            />
+          {/* Who You Will Meet Section */}
+          <div className="meet-section">
+            <p className="section-label">Who you will meet</p>
 
-            {/* Right Fade */}
-            <div
-              style={{
-                position: 'absolute',
-                right: 0,
-                top: 0,
-                bottom: 0,
-                width: '60px',
-                background: `linear-gradient(to left, ${colors.surfaceWhite}, transparent)`,
-                zIndex: 2,
-                pointerEvents: 'none',
-              }}
-            />
-
-            {/* Ticker Track */}
-            <div
-              style={{
-                display: 'flex',
-                width: 'max-content',
-                animation: 'ticker 45s linear infinite',
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.animationPlayState = 'paused';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.animationPlayState = 'running';
-              }}
-            >
-              {sectors.map((s, i) => (
-                <div
-                  key={i}
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '14px',
-                    padding: '18px 28px',
-                    whiteSpace: 'nowrap',
-                    borderRight: `1px solid ${colors.borderLight}`,
-                    fontSize: '0.95rem',
-                    fontWeight: 500,
-                    color: colors.primaryDark,
-                  }}
-                >
-                  <span
-                    style={{
-                      width: '6px',
-                      height: '6px',
-                      borderRadius: '50%',
-                      background: colors.primaryDark,
-                      opacity: 0.6,
-                      flexShrink: 0,
-                    }}
-                  />
-                  {s}
-                </div>
-              ))}
+            <div className="meet-grid">
+              {data.whoYouWillMeet.map((item, i) => {
+                const IconComponent = icons[i % icons.length];
+                return (
+                  <div key={i} className="meet-card">
+                    <div className="meet-icon">
+                      <IconComponent size={24} />
+                    </div>
+                    <span className="meet-text">{item}</span>
+                  </div>
+                );
+              })}
             </div>
+          </div>
 
-            <style>{`
-              @keyframes ticker {
-                0%   { transform: translateX(0); }
-                100% { transform: translateX(-50%); }
-              }
-            `}</style>
+          {/* Sectors Covered Section */}
+          <div className="sectors-section">
+            <p className="section-label">Sectors covered</p>
+
+            <div className="sectors-container">
+              <div className="sectors-wrapper">
+                {data.sectorsCovered.map((s, i) => (
+                  <div key={i} className="sector-capsule">
+                    <span className="sector-dot" />
+                    {s}
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
+      </section>
 
-      </div>
+      <style jsx>{`
+        .participant-section {
+          background: #f8fafc;
+          padding: 100px 80px;
+          border-top: 1px solid #e2e8f0;
+          width: 100%;
+          box-sizing: border-box;
+        }
 
-      {/* Responsive Media Queries */}
-      <style>{`
+        .participant-wrap {
+          max-width: 1400px;
+          margin: 0 auto;
+          opacity: ${visible ? 1 : 0};
+          transform: ${visible ? 'translateY(0)' : 'translateY(24px)'};
+          transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .eyebrow {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          margin-bottom: 32px;
+          justify-content: flex-start;
+        }
+
+        .eyebrow-dot {
+          width: 8px;
+          height: 8px;
+          border-radius: 50%;
+          background: #1a6e4a;
+          flex-shrink: 0;
+        }
+
+        .eyebrow-text {
+          font-size: 0.75rem;
+          font-weight: 700;
+          letter-spacing: 0.13em;
+          text-transform: uppercase;
+          color: #94aec4;
+        }
+
+        .participant-header {
+          margin-bottom: 72px;
+          text-align: left;
+          max-width: 900px;
+        }
+
+        .participant-header h1 {
+          font-size: 3rem;
+          font-weight: 400;
+          color: #0b1220;
+          line-height: 1.2;
+          letter-spacing: -0.02em;
+          margin: 0 0 16px 0;
+        }
+
+        .participant-header p {
+          font-size: 1.1rem;
+          color: #475569;
+          line-height: 1.7;
+          margin: 0;
+        }
+
+        .meet-section {
+          margin-bottom: 80px;
+        }
+
+        .section-label {
+          font-size: 0.75rem;
+          font-weight: 700;
+          letter-spacing: 0.12em;
+          text-transform: uppercase;
+          color: #4dd9ac;
+          margin: 0 0 28px 0;
+          text-align: left;
+        }
+
+        .meet-grid {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          gap: 20px;
+          max-width: 1300px;
+        }
+
+        .meet-card {
+          background: white;
+          border: 1px solid #e8edf2;
+          border-radius: 12px;
+          padding: 32px 24px;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          text-align: center;
+          gap: 16px;
+          transition: all 0.3s ease;
+          cursor: pointer;
+        }
+
+        .meet-card:hover {
+          border-color: #4dd9ac;
+          box-shadow: 0 8px 24px rgba(77, 217, 172, 0.12);
+          transform: translateY(-4px);
+        }
+
+        .meet-icon {
+          width: 56px;
+          height: 56px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background: rgba(77, 217, 172, 0.1);
+          border-radius: 8px;
+          color: #1a6e4a;
+        }
+
+        .meet-text {
+          font-size: 0.95rem;
+          font-weight: 500;
+          color: #0b1220;
+          line-height: 1.5;
+        }
+
+        .sectors-section {
+          margin-top: 60px;
+        }
+
+        .sectors-container {
+          border-top: 1px solid #e2e8f0;
+          border-bottom: 1px solid #e2e8f0;
+          background: #f8fafc;
+          padding: 20px 0;
+        }
+
+        .sectors-wrapper {
+          display: flex;
+          gap: 12px;
+          flex-wrap: wrap;
+          max-width: 1300px;
+          padding: 0 20px;
+        }
+
+        .sector-capsule {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          padding: 8px 16px;
+          background: rgba(77, 217, 172, 0.08);
+          border: 1px solid rgba(77, 217, 172, 0.2);
+          border-radius: 20px;
+          font-size: 0.85rem;
+          font-weight: 500;
+          color: #1a6e4a;
+          white-space: nowrap;
+        }
+
+        .sector-dot {
+          width: 4px;
+          height: 4px;
+          border-radius: 50%;
+          background: #1a6e4a;
+          flex-shrink: 0;
+        }
+
         @media (max-width: 1200px) {
-          section { padding: 80px 60px; }
+          .participant-section {
+            padding: 80px 60px;
+          }
+        }
+
+        @media (max-width: 900px) {
+          .meet-grid {
+            grid-template-columns: repeat(2, 1fr);
+          }
+
+          .participant-header h1 {
+            font-size: 2.2rem;
+          }
+
+          .sectors-wrapper {
+            padding: 0 10px;
+          }
         }
 
         @media (max-width: 768px) {
-          section { padding: 60px 24px; }
-          h2 { font-size: 2.2rem !important; }
-        }
+          .participant-section {
+            padding: 60px 24px;
+          }
 
-        @media (max-width: 480px) {
-          section { padding: 48px 16px; }
-          h2 { font-size: 1.8rem !important; }
-          .grid-item { grid-template-columns: 1fr !important; }
+          .meet-grid {
+            grid-template-columns: 1fr;
+          }
+
+          .participant-header h1 {
+            font-size: 1.8rem;
+          }
         }
       `}</style>
-    </section>
+    </>
   );
 }

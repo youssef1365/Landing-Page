@@ -70,7 +70,6 @@ export default function StatsAndCta({ userType, onApply }) {
 
   const labelLineStyle = {
     width: '32px',
-    height: '2px',
     background: colors.primary,
     boxShadow: `0 0 10px ${colors.primary}`,
   };
@@ -121,14 +120,14 @@ export default function StatsAndCta({ userType, onApply }) {
 
   const suffixStyle = {
     fontSize: '0.65em',
-    fontWeight: 600,
+    fontWeight: 700,
     letterSpacing: '0.05em',
     color: colors.primary,
   };
 
   const statSublabelStyle = {
     fontSize: '11px',
-    fontWeight: 600,
+    fontWeight: 900,
     letterSpacing: '0.16em',
     color: colors.textMuted,
   };
@@ -140,7 +139,7 @@ export default function StatsAndCta({ userType, onApply }) {
   };
 
   const headingStyle = {
-    fontSize: '2.8rem',
+    fontSize: '2.2rem',
     fontWeight: 300,
     lineHeight: 1.2,
     letterSpacing: '-0.02em',
@@ -148,9 +147,18 @@ export default function StatsAndCta({ userType, onApply }) {
     color: colors.textDark,
   };
 
+  const headingStylee = {
+      fontSize: '2.5rem',
+      fontWeight: 900,
+      lineHeight: 1.2,
+      letterSpacing: '-0.02em',
+      margin: '0 0 20px 0',
+      color: colors.winkblue,
+  };
+
   const ctaCopyStyle = {
     fontSize: '1rem',
-    lineHeight: 1.75,
+    lineHeight: 0,
     margin: '0 0 40px 0',
     color: colors.textSecondary,
   };
@@ -186,40 +194,36 @@ export default function StatsAndCta({ userType, onApply }) {
           </span>
         </div>
 
-        <div style={statsGridStyle}>
-          {stats.items.map((item, i) => (
-            <div
-              key={i}
-              style={i === stats.items.length - 1 ? statCellLastStyle : statCellStyle}
-            >
-              <div style={statValueStyle}>
-                {item.value}
-                <span style={suffixStyle}>
-                  {item.suffix}
-                </span>
-              </div>
-              <div style={statSublabelStyle}>
-                {item.label.toUpperCase()}
-              </div>
-            </div>
-          ))}
-        </div>
-
         <div style={ctaBlockStyle}>
+            <p style={headingStylee} > TRUSTED BY EXPORTERS WORLDWIDE </p>
           <h2 style={headingStyle}>
             {d.headline}
           </h2>
           <p style={ctaCopyStyle}>
             {d.copy}
           </p>
-          <button
-            style={buttonStyle}
-            onClick={() => onApply?.(userType)}
-            onMouseEnter={() => setIsHovering(true)}
-            onMouseLeave={() => setIsHovering(false)}
-          >
-            {d.button}
-          </button>
+          <p style={ctaCopyStyle}>
+            {d.copy2}
+          </p>
+        </div>
+
+        <div style={statsGridStyle}>
+            {stats.items.map((item, i) => (
+                <div
+                   key={i}
+                   style={i === stats.items.length - 1 ? statCellLastStyle : statCellStyle}
+                >
+                <div style={statValueStyle}>
+                   {item.value}
+                   <span style={suffixStyle}>
+                       {item.suffix}
+                   </span>
+                </div>
+                  <div style={statSublabelStyle}>
+                   {item.label.toUpperCase()}
+                  </div>
+                </div>
+            ))}
         </div>
       </div>
     </section>

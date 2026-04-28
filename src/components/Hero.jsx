@@ -42,14 +42,14 @@ export default function Hero({ userType }) {
 
           <p className="hero-subheadline">{heroData.subheadline}</p>
 
-          <div className="hero-ctas">
-            <button className="cta-primary" onClick={() => setActiveModal(heroData.ctaPrimary.target)}>
-              {heroData.ctaPrimary.text}
-            </button>
-            <button className="cta-secondary" onClick={() => setActiveModal(heroData.ctaSecondary.target)}>
-              {heroData.ctaSecondary.text}
-            </button>
-          </div>
+         <div className="hero-ctas">
+           <a href={`#${heroData.ctaPrimary.target}`} className="cta-primary">
+             {heroData.ctaPrimary.text}
+           </a>
+           <a href={`#${heroData.ctaSecondary.target}`} className="cta-secondary">
+             {heroData.ctaSecondary.text}
+           </a>
+         </div>
         </div>
       </section>
 
@@ -151,7 +151,7 @@ export default function Hero({ userType }) {
         .cta-primary, .cta-secondary {
           padding: 13px 26px;
           border-radius: 5px;
-          font-size: 0.75rem;
+          font-size: 1rem;
           font-weight: 800;
           text-transform: uppercase;
           cursor: pointer;
